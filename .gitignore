@@ -1,0 +1,37 @@
+**/*.iml
+**/*.ipr
+**/*.iws
+**/*.log
+**/.classpath
+**/.idea/
+**/.project
+**/.settings
+**/target/
+**/*.class
+
+# General
+**/.DS_Store
+.AppleDouble
+.LSOverride
+
+# Environment / secrets
+.env
+.env.*
+application-local.yaml
+application-local.yml
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+.claude/

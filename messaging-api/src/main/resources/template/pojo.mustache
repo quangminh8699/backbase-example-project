@@ -1,0 +1,120 @@
+import com.fasterxml.jackson.annotation.*;
+import java.util.*;
+import jakarta.annotation.Generated;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.Valid;
+
+{{#description}}
+/**
+ * {{{.}}}
+ */
+{{/description}}
+@JsonTypeName("{{classVarName}}")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+{{#jackson}}
+@JsonPropertyOrder({
+{{#vars}}    "{{name}}"{{^-last}},{{/-last}}
+{{/vars}}
+})
+{{/jackson}}
+@Generated(value = "com.backbase.oss.codegen.java.BoatSpringCodeGen", date = "{{generationTimestamp}}")
+public class {{classname}} {
+
+{{#vars}}
+  {{#isArray}}@JsonSetter(nulls = Nulls.AS_EMPTY)
+  {{/isArray}}{{#required}}@NotNull
+  {{/required}}{{#isArray}}@Valid
+  {{/isArray}}{{#isModel}}@Valid
+  {{/isModel}}@JsonProperty("{{baseName}}")
+  private {{{datatypeWithEnum}}} {{name}}{{#isArray}} = new ArrayList<{{{items.datatypeWithEnum}}}>(){{/isArray}};
+
+{{/vars}}
+  // Catch-all for unknown fields
+  @JsonProperty("additions")
+  @JsonInclude(JsonInclude.Include.NON_EMPTY)
+  private Map<String, String> additions = new HashMap<String, String>();
+
+{{#vars}}
+  public {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}}) {
+    this.{{name}} = {{name}};
+    return this;
+  }
+
+{{/vars}}
+{{#vars}}
+  public {{classname}} with{{#lambda.titlecase}}{{name}}{{/lambda.titlecase}}({{{datatypeWithEnum}}} {{name}}) {
+    this.{{name}} = {{name}};
+    return this;
+  }
+
+  /**
+   * {{description}}
+   * @return {{name}}
+   */
+  {{#vendorExtensions.x-schema}}
+  @Schema(name = "{{baseName}}", requiredMode = Schema.RequiredMode.{{#required}}REQUIRED{{/required}}{{^required}}NOT_REQUIRED{{/required}})
+  {{/vendorExtensions.x-schema}}
+  @JsonProperty("{{baseName}}")
+  public {{{datatypeWithEnum}}} get{{#lambda.titlecase}}{{name}}{{/lambda.titlecase}}() {
+    return {{name}};
+  }
+
+  @JsonProperty("{{baseName}}")
+  public void set{{#lambda.titlecase}}{{name}}{{/lambda.titlecase}}({{{datatypeWithEnum}}} {{name}}) {
+    this.{{name}} = {{name}};
+  }
+
+{{/vars}}
+  public void putAdditionalInfoItem(String key, String value) {
+    if (this.additions == null) {
+      this.additions = new HashMap<>();
+    }
+    this.additions.put(key, value);
+  }
+
+  @JsonProperty("additions")
+  public Map<String, String> getAdditions() {
+    return this.additions;
+  }
+
+  @JsonProperty("additions")
+  public void setAdditions(Map<String, String> additions) {
+    this.additions = additions;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    {{classname}} that = ({{classname}}) o;
+    return {{#vars}}Objects.equals({{name}}, that.{{name}}){{^-last}} &&
+           {{/-last}}{{/vars}};
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash({{#vars}}{{name}}{{^-last}}, {{/-last}}{{/vars}});
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class {{classname}} {\n");
+    {{#vars}}
+    sb.append("    {{name}}: ").append(toIndentedString({{name}})).append("\n");
+    {{/vars}}
+    sb.append("}");
+    return sb.toString();
+  }
+
+  /**
+   * Convert the given object to string with each line indented by 4 spaces (except the first line).
+   */
+  private String toIndentedString(Object o) {
+    if (o == null) {
+      return "null";
+    }
+    return o.toString().replace("\n", "\n    ");
+  }
+}
