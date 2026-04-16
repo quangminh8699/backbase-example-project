@@ -1,11 +1,10 @@
 package com.backbase.example.controller;
 
-import com.backbase.message.api.MessageApi;
-import com.backbase.message.api.model.MessageItem;
-import com.backbase.message.api.model.MessageId;
+import com.backbase.dbs.messaging_service.api.service.v2.MessageApi;
+import com.backbase.dbs.messaging_service.api.service.v2.model.MessageId;
+import com.backbase.dbs.messaging_service.api.service.v2.model.MessageItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 

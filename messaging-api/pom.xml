@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -18,7 +18,9 @@
         <!-- plugin versions -->
         <boat-maven-plugin.version>0.17.61</boat-maven-plugin.version>
         <!-- remove as needed for more detailed inspection of specs -->
-        <ignored-lint-rules>150,219,215,218,166,136,174,235,107,171,224,143,151,129,146,147,172,145,115,132,120,134,183,154,105,104,130,118,110,153,101,176,116,M009,H002,M010,H001,M008,S005,S006,S007,M011,M0012,B013,B007U,B009U</ignored-lint-rules>
+        <ignored-lint-rules>
+            150,219,215,218,166,136,174,235,107,171,224,143,151,129,146,147,172,145,115,132,120,134,183,154,105,104,130,118,110,153,101,176,116,M009,H002,M010,H001,M008,S005,S006,S007,M011,M0012,B013,B007U,B009U
+        </ignored-lint-rules>
     </properties>
 
     <dependencies>
@@ -138,31 +140,48 @@
                             <generateAliasAsModel>true</generateAliasAsModel>
                         </configuration>
                     </execution>
+                    <!--                    <execution>-->
+                    <!--                        <id>generate-client-api</id>-->
+                    <!--                        <phase>generate-sources</phase>-->
+                    <!--                        <goals>-->
+                    <!--                            <goal>generate-spring-boot-embedded</goal>-->
+                    <!--                        </goals>-->
+                    <!--                        <configuration>-->
+                    <!--                            <inputSpec>${project.basedir}/src/main/resources/client-api-v1.yaml</inputSpec>-->
+                    <!--                            <apiPackage>com.backbase.message.api</apiPackage>-->
+                    <!--                            <modelPackage>com.backbase.message.api.model</modelPackage>-->
+                    <!--                            <templateDirectory>${project.basedir}/src/main/resources/template</templateDirectory>-->
+                    <!--                            <generateSupportingFiles>false</generateSupportingFiles>-->
+                    <!--                        </configuration>-->
+                    <!--                    </execution>-->
+                    <!--                    <execution>-->
+                    <!--                        <id>generate-service-api</id>-->
+                    <!--                        <phase>generate-sources</phase>-->
+                    <!--                        <goals>-->
+                    <!--                            <goal>generate-spring-boot-embedded</goal>-->
+                    <!--                        </goals>-->
+                    <!--                        <configuration>-->
+                    <!--                            <inputSpec>${project.basedir}/src/main/resources/service-api-v1.yaml</inputSpec>-->
+                    <!--                            <apiPackage>com.backbase.message.service.api</apiPackage>-->
+                    <!--                            <modelPackage>com.backbase.message.service.api.model</modelPackage>-->
+                    <!--                            <generateSupportingFiles>false</generateSupportingFiles>-->
+                    <!--                        </configuration>-->
+                    <!--                    </execution>-->
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
                     <execution>
-                        <id>generate-client-api</id>
-                        <phase>generate-sources</phase>
+                        <id>assemble-api-zip</id>
                         <goals>
-                            <goal>generate-spring-boot-embedded</goal>
+                            <goal>single</goal>
                         </goals>
+                        <phase>package</phase>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/client-api-v1.yaml</inputSpec>
-                            <apiPackage>com.backbase.message.api</apiPackage>
-                            <modelPackage>com.backbase.message.api.model</modelPackage>
-                            <templateDirectory>${project.basedir}/src/main/resources/template</templateDirectory>
-                            <generateSupportingFiles>false</generateSupportingFiles>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>generate-service-api</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate-spring-boot-embedded</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/service-api-v1.yaml</inputSpec>
-                            <apiPackage>com.backbase.message.service.api</apiPackage>
-                            <modelPackage>com.backbase.message.service.api.model</modelPackage>
-                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <descriptors>
+                                <descriptor>${project.basedir}/src/main/resources/assembly/api.xml</descriptor>
+                            </descriptors>
                         </configuration>
                     </execution>
                 </executions>

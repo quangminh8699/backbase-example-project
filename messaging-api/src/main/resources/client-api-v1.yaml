@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: Message Client API Spec
   description: Specs for Message Client API
-  version: 1.1.0
+  version: 1.0.0
   x-icon: credit_card
 
 servers:
