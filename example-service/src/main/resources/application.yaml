@@ -2,6 +2,7 @@ server:
   port: 8080
 
 
+
 # API Registry client configuration
 eureka:
   instance:
@@ -34,4 +35,6 @@ backbase:
         - /**
 logging:
   level:
+    com.backbase.buildingblocks.presentation.errors: DEBUG
+
     root: info
