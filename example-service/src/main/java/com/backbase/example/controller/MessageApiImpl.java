@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 public class MessageApiImpl implements MessageApi {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(MessageApiImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageApiImpl.class);
 
     @Override
     public ResponseEntity<MessageItem> getMessage(String id) {
