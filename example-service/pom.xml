@@ -22,6 +22,8 @@
     <properties>
         <java.version>21</java.version>
         <boat-maven-plugin.version>0.17.62</boat-maven-plugin.version>
+        <liquibase-maven-plugin.version>3.10.2</liquibase-maven-plugin.version>
+        <liquibase-lint-extension.version>13.0.0</liquibase-lint-extension.version>
     </properties>
 
     <dependencies>
@@ -68,6 +70,19 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>${liquibase-maven-plugin.version}</version>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>com.backbase.buildingblocks</groupId>
+                        <artifactId>liquibase-lint-extension</artifactId>
+                        <version>${liquibase-lint-extension.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
